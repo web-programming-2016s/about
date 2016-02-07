@@ -18,7 +18,7 @@ All homeworks can be found in course outline.
 
     * [Guide to create tunnel (in estonian, but with screenshots)](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
 
-* Mac OS | [VIDEO](Connect to greeny from Mac OS)
+* Mac OS | [VIDEO](https://youtu.be/RJc-Gvpn9M4)
 ```
 1. open Terminal app
 
