@@ -14,11 +14,11 @@ All homeworks can be found in course outline.
 
 ### Connecting to greeny server
 
-* Windows [video](https://youtu.be/kg5NAsRQAJ8)
+* Windows | [VIDEO](https://youtu.be/kg5NAsRQAJ8)
 
     * [Guide to create tunnel (in estonian, but with screenshots)](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
 
-* Mac [video](Connect to greeny from Mac OS)
+* Mac OS | [VIDEO](Connect to greeny from Mac OS)
 ```
 1. open Terminal app
 
