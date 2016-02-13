@@ -1,4 +1,4 @@
-# Web programming 2016a
+# Web programming 2016s
 
 * **Course overview:** [IFI6076](http://www.cs.tlu.ee/instituut/oppe_tegevus/kp/kp_k_2016/)
 * **Teacher:** Romil Rõbtšenkov, [romilr@tlu.ee](mailto:romilr@tlu.ee)
@@ -101,6 +101,15 @@ They are valid also in real life!
     * Create user to [GitHub](https://github.com/)
 1. Testing GitHub workflow
 1. Few lines of code (Hello world)
+
+### 2 lesson
+
+1. Connecting to greeny and using GitHub for version control
+1. intro to PHP
+    * variables
+    * logical operators, if statement
+    * for loop
+    * using date and [php.net](http://php.net) documentation
 
 
 ## License
