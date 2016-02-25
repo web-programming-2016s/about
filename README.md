@@ -111,6 +111,35 @@ They are valid also in real life!
     * for loop
     * using date and [php.net](http://php.net) documentation
 
+### 3 lesson
+
+1. Ceating [HTML form](http://www.w3schools.com/html/html_forms.asp)
+1. Validating fields
+```PHP
+   isset($_GET["name"]){
+      //varialbe name exists (?name="Romil") in the URL http://www.romil.ee/hello.php?name="Romil"
+   }else{
+      //there is no variable name in the URL http://www.romil.ee/hello.php
+   }    
+   
+   
+   empty($_GET["name"]){
+      //varialbe name in the URL is empty or empty string http://www.romil.ee/hello.php?name= OR http://www.romil.ee/hello.php?name=""
+   }else{
+      //there is value Romil in the variable  URL http://www.romil.ee/hello.php?name="Romil"
+   }    
+```
+1. Added [1. homework](https://github.com/web-programming-2016s/1.homework)
+
+### 4 lesson
+
+1. Creating a [database](http://www.w3schools.com/sql/sql_create_db.asp), [table](http://www.w3schools.com/sql/sql_create_table.asp) and [inserting rows](http://www.w3schools.com/sql/sql_insert.asp). Used commands: 
+```SQL
+mysqli -uUsername -pPassword
+
+CREATE DATABASE databaseusername_greenyusername;
+```
+2. Using greeny.cs.tlu.ee/phpMyadmin -> you can access it from home localhost:5555/phpMyAdmin
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> and all other materials under https://github.com/web-programming-2016s are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
