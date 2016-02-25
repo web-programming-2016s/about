@@ -138,6 +138,8 @@ They are valid also in real life!
 mysqli -uUsername -pPassword
 
 CREATE DATABASE databaseusername_greenyusername;
+
+INSERT INTO `messages_sample`(`recipient`, `message`) VALUES ("romil@romil.romil", "test")
 ```
 2. Using greeny.cs.tlu.ee/phpMyadmin -> you can access it from home localhost:5555/phpMyAdmin
 
