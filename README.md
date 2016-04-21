@@ -139,9 +139,183 @@ mysqli -uUsername -pPassword
 
 CREATE DATABASE databaseusername_greenyusername;
 
+CREATE TABLE IF NOT EXISTS `messages_sample` (
+  `id` int(11) NOT NULL,
+  `recipient` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` timestamp NULL DEFAULT NULL
+); 
+
 INSERT INTO `messages_sample`(`recipient`, `message`) VALUES ("romil@romil.romil", "test")
 ```
 2. Using greeny.cs.tlu.ee/phpMyadmin -> you can access it from home localhost:5555/phpMyAdmin
+
+### 5 lesson
+1. Separate configuration file outside of project folder
+```PHP
+//config.php
+<?php
+	
+	$db_username = "username";
+	$db_password = "password";
+
+?>
+```
+2. Insert into database
+```PHP
+require_once("../config.php");
+$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_romil");
+$stmt = $mysql->prepare("INSERT INTO messages_sample (recipient, message) VALUES (?,?)");
+echo $mysql->error;
+
+// we are replacing question marks with values
+// s - string, date or smth that is based on characters and numbers
+// i - integer, number
+// d - decimal, float
+
+//for each question mark its type with one letter
+$stmt->bind_param("ss", $_GET["to"], $_GET["message"]);
+
+if($stmt->execute()){
+	echo "saved sucessfully";
+}else{
+	echo $stmt->error;
+}
+```
+3. Getting data from database 
+```PHP
+require_once("../config.php");
+$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_romil");
+$stmt = $mysql->prepare("SELECT id, recipient, message, created FROM messages_sample ORDER BY created DESC LIMIT 10");
+echo $mysql->error;
+$stmt->bind_result($id, $recipient, $message, $created);
+$stmt->execute();
+while($stmt->fetch()){
+	//DO SOMETHING FOR EACH ROW
+	echo $id." ".$message."<br>";
+}
+```
+### 6 lesson
+1. Added [Bootstrap](http://getbootstrap.com) 
+2. Archiving in database
+```PHP
+if(isset($_GET["delete"])){
+		
+		echo "Deleting row with id:".$_GET["delete"];
+		
+		// NOW() = current date-time
+		$stmt = $mysql->prepare("UPDATE messages_sample SET deleted=NOW() WHERE id = ?");
+		
+		echo $mysql->error;
+		
+		//replace the ?
+		$stmt->bind_param("i", $_GET["delete"]);
+		
+		if($stmt->execute()){
+			echo "deleted successfully";
+		}else{
+			echo $stmt->error;
+		}
+		
+		//closes the statement, so others can use connection
+		$stmt->close();
+}
+
+```
+### 7 lesson
+1. Updating data
+```PHP
+if(isset($_GET["to"]) && isset($_GET["message"])){
+   $stmt = $mysql->prepare("UPDATE messages_sample SET recipient=?, message=? WHERE id=?");
+   			
+   echo $mysql->error;
+   
+   $stmt->bind_param("ssi", $_GET["to"], $_GET["message"], $_GET["edit"]);
+   
+   if($stmt->execute()){
+   	
+   	echo "saved successfully"; 
+   	
+   }else{
+   	echo $stmt->error;
+   }
+}
+```
+
+### 8 lesson
+1. To forward user, use
+```PHP
+header("Location: login.php");
+```
+2. Using session
+```PHP
+//start session, make use of session variables possible
+session_start();
+
+//assign value
+$_SESSION["name"] = "Romil";
+
+//destroy session on logout, makes session variables undefined
+session_destroy();
+```
+1. Hashing password 
+```PHP
+$pass = "romilromil";
+
+$pass = hash("sha512", $pass);
+
+// now $pass equals:
+// 922de38b118464a94bfceeb00de53f88f9161597fdd2028d4ee4441920cef83a1c7cc29b9818b2858b59f3a3f66f042c66d8a49dacc29d24d130eb736e1884bc
+```
+
+### 9 lesson
+1. creating connected tables
+```SQL
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(128) NOT NULL
+);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+
+CREATE TABLE IF NOT EXISTS `interests` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+);
+ALTER TABLE `interests`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+
+CREATE TABLE IF NOT EXISTS `users_interests` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `interests_id` int(11) NOT NULL
+);
+ALTER TABLE `users_interests`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `interests_id` (`interests_id`);
+
+/* Connecting tables */
+
+ALTER TABLE `users_interests`
+  ADD CONSTRAINT `users_interests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `users_interests_ibfk_2` FOREIGN KEY (`interests_id`) REFERENCES `interests` (`id`);
+
+```
+2. Quering from multiple tables
+```SQL
+SELECT interests.name FROM users_interests
+INNER JOIN interests ON
+users_interests.interests_id = interests.id
+WHERE users_interests.user_id = ?
+```
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> and all other materials under https://github.com/web-programming-2016s are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
