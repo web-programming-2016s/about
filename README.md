@@ -152,7 +152,7 @@ INSERT INTO `messages_sample`(`recipient`, `message`) VALUES ("romil@romil.romil
 2. Using greeny.cs.tlu.ee/phpMyadmin -> you can access it from home localhost:5555/phpMyAdmin
 
 ### 5 lesson
-1. Separate configuration file outside of project folder
+1 Separate configuration file outside of project folder
 ```PHP
 //config.php
 <?php
@@ -162,7 +162,7 @@ INSERT INTO `messages_sample`(`recipient`, `message`) VALUES ("romil@romil.romil
 
 ?>
 ```
-2. Insert into database
+2 Insert into database
 ```PHP
 require_once("../config.php");
 $mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_romil");
@@ -197,8 +197,8 @@ while($stmt->fetch()){
 }
 ```
 ### 6 lesson
-1. Added [Bootstrap](http://getbootstrap.com) 
-2. Archiving in database
+1 Added [Bootstrap](http://getbootstrap.com) 
+2 Archiving in database
 ```PHP
 if(isset($_GET["delete"])){
 		
@@ -224,7 +224,7 @@ if(isset($_GET["delete"])){
 
 ```
 ### 7 lesson
-1. Updating data
+1 Updating data
 ```PHP
 if(isset($_GET["to"]) && isset($_GET["message"])){
    $stmt = $mysql->prepare("UPDATE messages_sample SET recipient=?, message=? WHERE id=?");
@@ -244,11 +244,11 @@ if(isset($_GET["to"]) && isset($_GET["message"])){
 ```
 
 ### 8 lesson
-1. To forward user, use
+1 To forward user, use
 ```PHP
 header("Location: login.php");
 ```
-2. Using session
+2 Using session
 ```PHP
 //start session, make use of session variables possible
 session_start();
@@ -259,7 +259,7 @@ $_SESSION["name"] = "Romil";
 //destroy session on logout, makes session variables undefined
 session_destroy();
 ```
-3. Hashing password 
+3 Hashing password 
 ```PHP
 $pass = "romilromil";
 
@@ -270,7 +270,7 @@ $pass = hash("sha512", $pass);
 ```
 
 ### 9 lesson
-1. creating connected tables
+1 creating connected tables
 ```SQL
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
@@ -309,7 +309,7 @@ ALTER TABLE `users_interests`
   ADD CONSTRAINT `users_interests_ibfk_2` FOREIGN KEY (`interests_id`) REFERENCES `interests` (`id`);
 
 ```
-2. Quering from multiple tables
+2 Quering from multiple tables
 ```SQL
 SELECT interests.name FROM users_interests
 INNER JOIN interests ON
