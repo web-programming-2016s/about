@@ -259,7 +259,7 @@ $_SESSION["name"] = "Romil";
 //destroy session on logout, makes session variables undefined
 session_destroy();
 ```
-1. Hashing password 
+3. Hashing password 
 ```PHP
 $pass = "romilromil";
 
